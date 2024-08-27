@@ -11,7 +11,13 @@ const App = () => {
     <Suspense>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
+          <Route path="/" element={<HomePage />}>
+            <Route index element={"Dashboard"} />
+            <Route path="pages" element={"Pages"} />
+            <Route path="news" element={"News"} />
+            <Route path="vacancies" element={"Vacancies"} />
+            <Route path="moderators" element={"Moderators"} />
+          </Route>
           <Route path="login" element={<LoginPage />} />
           <Route path="registration" element={<RegistrationPage />} />
         </Route>
