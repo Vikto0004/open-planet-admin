@@ -24,6 +24,8 @@ const LoginForm = () => {
     values: FormValues,
     actions: FormikHelpers<FormValues>
   ) => {
+    console.log(values);
+
     actions.resetForm();
   };
 
