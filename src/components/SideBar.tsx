@@ -3,11 +3,19 @@ import {
   ChartColumnDecreasing,
   Layers3,
   Newspaper,
+  StickyNote,
   UserRoundCog,
 } from "lucide-react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const SideBar = () => {
+  const [isPagesOpen, setIsPagesOpen] = useState<boolean>(false);
+
+  const togglePagesMenu = () => {
+    setIsPagesOpen(!isPagesOpen);
+  };
+
   return (
     <aside className="shadow-md p-4 border-r min-h-full max-w-[20%] w-full">
       <h2 className="font-bold uppercase mb-10">Open Planet | Admin</h2>
@@ -22,21 +30,86 @@ const SideBar = () => {
             }
           >
             <ChartColumnDecreasing />
-            Dashboard
+            Статистика
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/pages"
-            className={({ isActive }) =>
-              `${
-                isActive ? "bg-neutral-200" : ""
-              } uppercase font-medium text-sm p-2 rounded-md flex items-center gap-2 transition-opacity hover:opacity-50`
-            }
+        <li className="border rounded-md">
+          <button
+            onClick={togglePagesMenu}
+            className="uppercase font-medium text-sm p-2 rounded-md flex w-full items-center gap-2 transition-opacity hover:opacity-50"
           >
             <Layers3 />
-            Pages
-          </NavLink>
+            Сторінки
+          </button>
+          {isPagesOpen && (
+            <ul className="pl-4">
+              <li>
+                <NavLink
+                  to="/pages/home"
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "opacity-50" : ""
+                    } uppercase font-medium text-xs p-2 rounded-md flex items-center gap-2 transition-opacity hover:opacity-50`
+                  }
+                >
+                  <StickyNote size={15} />
+                  Головна
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/pages/about"
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "opacity-50" : ""
+                    } uppercase font-medium text-xs p-2 rounded-md flex items-center gap-2 transition-opacity hover:opacity-50`
+                  }
+                >
+                  <StickyNote size={15} />
+                  Про наш фонд
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/pages/support"
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "opacity-50" : ""
+                    } uppercase font-medium text-xs p-2 rounded-md flex items-center gap-2 transition-opacity hover:opacity-50`
+                  }
+                >
+                  <StickyNote size={15} />
+                  Підтримати фонд
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/pages/international-transfers"
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "opacity-50" : ""
+                    } uppercase font-medium text-xs p-2 rounded-md flex items-center gap-2 transition-opacity hover:opacity-50`
+                  }
+                >
+                  <StickyNote size={15} />
+                  Перекази з-за кордону
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/pages/public-offer"
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "opacity-50" : ""
+                    } uppercase font-medium text-xs p-2 rounded-md flex items-center gap-2 transition-opacity hover:opacity-50`
+                  }
+                >
+                  <StickyNote size={15} />
+                  Публічна оферта
+                </NavLink>
+              </li>
+            </ul>
+          )}
         </li>
         <li>
           <NavLink
@@ -48,7 +121,7 @@ const SideBar = () => {
             }
           >
             <Newspaper />
-            News
+            Новини
           </NavLink>
         </li>
         <li>
@@ -61,7 +134,7 @@ const SideBar = () => {
             }
           >
             <Briefcase />
-            Vacancies
+            Вакансії
           </NavLink>
         </li>
         <li>
@@ -74,7 +147,7 @@ const SideBar = () => {
             }
           >
             <UserRoundCog />
-            Moderators
+            Модерація
           </NavLink>
         </li>
       </ul>

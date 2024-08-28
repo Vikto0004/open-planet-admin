@@ -1,10 +1,10 @@
-import LoginPage from "@/pages/LoginPage";
-import RegistrationPage from "@/pages/RegistrationPage";
+import LoginPage from "@/pages/auth/LoginPage";
+import RegistrationPage from "@/pages/auth/RegistrationPage";
 import { lazy, Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 
 const Layout = lazy(() => import("./Layout"));
-const HomePage = lazy(() => import("../pages/HomePage"));
+const HomePage = lazy(() => import("../pages/home/HomePage"));
 
 const App = () => {
   return (
@@ -13,7 +13,19 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<HomePage />}>
             <Route index element={"Dashboard"} />
-            <Route path="pages" element={"Pages"} />
+            <Route path="pages" element={<Outlet />}>
+              <Route path="home" element={<div>Home Page</div>} />
+              <Route path="about" element={<div>About Page</div>} />
+              <Route path="support" element={<div>Support Page</div>} />
+              <Route
+                path="international-transfers"
+                element={<div>International Transfers Page</div>}
+              />
+              <Route
+                path="public-offer"
+                element={<div>Public Offer Page</div>}
+              />
+            </Route>
             <Route path="news" element={"News"} />
             <Route path="vacancies" element={"Vacancies"} />
             <Route path="moderators" element={"Moderators"} />
