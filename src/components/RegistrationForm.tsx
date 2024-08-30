@@ -13,6 +13,7 @@ import { Form, Formik, FormikHelpers } from "formik";
 import Input from "./ui/input";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
+import api from "@/api/api";
 
 interface FormValues {
   username: string;
@@ -21,11 +22,12 @@ interface FormValues {
 }
 
 const RegistrationForm = () => {
-  const handleSubmit = (
+  const handleSubmit = async (
     values: FormValues,
     actions: FormikHelpers<FormValues>
   ) => {
-    console.log(values);
+   const res =await api.post("/api/auth/register", values);
+    console.log(res);
 
     actions.resetForm();
   };
